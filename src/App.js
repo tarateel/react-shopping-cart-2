@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
+// - Now that we've created our `ProductContext` we can import into our `App.js`. Now we can start providing data across our application!
+import { ProductContext } from './contexts/ProductContext';
 import data from './data';
 
 // Components
 import Navigation from './components/Navigation';
 import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
+import { ProductContext } from './contexts/ProductContext';
 
 function App() {
 	const [products] = useState(data);
@@ -19,19 +22,27 @@ function App() {
 	};
 
 	return (
+		// - Wrap all of your components/routes in `App.js` inside of `ProductContext.Provider` component.
+		// - Next pass a value prop to your `Provider`.
+		// - In the value prop we'll pass in the products state, and an addItem function that will allow us to add books to the cart.
+		<ProductContext.Provider value={{ products, addItem }}>
 		<div className="App">
 			<Navigation cart={cart} />
 
-			{/* Routes */}
+				{/* Routes */}
+				{/* - Now that we're providing our products state and addItem function we can refactor our products route to no longer use render props.
+
+				**Before**
+
+				```js
+				<Route
+				  exact
+				  path="/"
+				  render={() => <Products products={products} addItem={addItem} />}
+				/> */}
 			<Route
-				exact
-				path="/"
-				render={() => (
-					<Products
-						products={products}
-						addItem={addItem}
-					/>
-				)}
+				exact path="/"
+				component={Products}
 			/>
 
 			<Route
@@ -39,14 +50,13 @@ function App() {
 				render={() => <ShoppingCart cart={cart} />}
 			/>
 		</div>
+		</ProductContext.Provider>
 	);
 }
 
 export default App;
 
 /*
-
-
 STEP 3 - Providing data with ProductContext
 
 Now that we've created our ProductContext we can import into our App.js. Now we can start providing data across our application!
