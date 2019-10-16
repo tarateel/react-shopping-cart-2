@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
-// - Now that we've created our `ProductContext` we can import into our `App.js`. Now we can start providing data across our application!
-import { ProductContext } from './contexts/ProductContext';
 import data from './data';
 
 // Components
 import Navigation from './components/Navigation';
 import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
+// - Now that we've created our `ProductContext` we can import into our `App.js`. Now we can start providing data across our application!
 import { ProductContext } from './contexts/ProductContext';
 
 function App() {
