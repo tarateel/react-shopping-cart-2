@@ -45,16 +45,7 @@ function App() {
 export default App;
 
 /*
-Step 1 - Add item functionality
 
-In App.js there is a function called addItem. Finish writing the logic in this function to be able to add the given item to the shopping cart
-STEP 2 - Creating ProductContext
-
-In src, create a new folder named contexts, this folder is going to be used to hold all of context objects we create.
-
-Inside that folder create a new file named ProductContext.js
-
-In this file, import the createContext function from the react library and create our ProductContext.
 
 STEP 3 - Providing data with ProductContext
 
