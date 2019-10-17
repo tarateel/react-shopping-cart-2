@@ -8,7 +8,7 @@ import Product from './Product';
 
 function Products() {
 	// `products and addItem passed into `useContext` hook
-	const { products, addItem } = useContext(ProductContext);
+	const { products, addItem, removeItem } = useContext(ProductContext);
 
 	return (
 		// `props` removed
@@ -18,6 +18,7 @@ function Products() {
 					key={product.id}
 					product={product}
 					addItem={addItem}
+					removeItem={removeItem}
 				/>
 			))}
 		</div>
