@@ -8,6 +8,7 @@ import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
 // - Now that we've created our `ProductContext` we can import into our `App.js`. Now we can start providing data across our application!
 import { ProductContext } from './contexts/ProductContext';
+import { CartContext } from './contexts/CartContext';
 
 function App() {
 	const [products] = useState(data);
@@ -25,30 +26,33 @@ function App() {
 		// - Next pass a value prop to your `Provider`.
 		// - In the value prop we'll pass in the products state, and an addItem function that will allow us to add books to the cart.
 		<ProductContext.Provider value={{ products, addItem }}>
-		<div className="App">
-			<Navigation cart={cart} />
+			<CartContext.Provider value={cart}>
+				<div className="App">
+					<Navigation cart={cart} />
 
-				{/* Routes */}
-				{/* - Now that we're providing our products state and addItem function we can refactor our products route to no longer use render props.
+						{/* Routes */}
+						{/* - Now that we're providing our products state and addItem function we can refactor our products route to no longer use render props.
 
-				**Before**
+						**Before**
 
-				```js
-				<Route
-				  exact
-				  path="/"
-				  render={() => <Products products={products} addItem={addItem} />}
-				/> */}
-			<Route
-				exact path="/"
-				component={Products}
-			/>
+							```js
+							<Route
+				  			exact
+				  			path="/"
+				  			render={() => <Products products={products} addItem={addItem} />}
+							/> */}
+					<Route
+						exact path="/"
+						component={Products}
+					/>
 
-			<Route
-				path="/cart"
-				render={() => <ShoppingCart cart={cart} />}
-			/>
-		</div>
+					<Route
+						path="/cart"
+						component={ShoppingCart} />}
+					/>
+				</div>
+			</CartContext.Provider>
+			{/* // - Let's start with our `ShoppingCart` component first. Go ahead and refactor the `ShoppingCart` route to no longer use render props. This will throw us an error, but we'll be able to resolve it quickly. */}
 		</ProductContext.Provider>
 	);
 }
